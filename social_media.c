@@ -61,5 +61,6 @@ int main(void)
 		#endif
 	}
 
+	lg_free(users_graph);
 	return 0;
 }

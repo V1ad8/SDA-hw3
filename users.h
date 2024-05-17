@@ -1,9 +1,14 @@
+#pragma once
+
 #include <stdint.h>
+#include "lab_implem.h"
 
 /**
  * Initializes the user list
 */
 void init_users(void);
+
+void free_users(void);
 
 /**
  * Find the user_id of a user by it's name

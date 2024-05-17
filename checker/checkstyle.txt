@@ -1,0 +1,323 @@
+./friends.c:97: ERROR:TRAILING_STATEMENTS: trailing statements should be on next line
+./friends.c:127: CHECK:LONG_LINE: line length of 81 exceeds 80 columns
+./friends.c:161: CHECK:LONG_LINE: line length of 81 exceeds 80 columns
+./friends.c:209: WARNING:BRACES: braces {} are not necessary for single statement blocks
+./friends.h:21: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./friends.h:21: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./friends.h:21: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:6: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:6: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:7: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:9: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:11: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:15: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:17: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:18: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:19: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:19: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:21: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:23: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:24: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:24: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:26: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:30: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:32: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:32: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:33: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:35: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:36: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:38: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:40: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:43: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:43: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:45: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:47: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:48: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:48: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:50: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:52: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:53: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:53: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:54: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:54: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:55: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:56: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:56: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:57: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:57: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:58: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:58: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:59: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:61: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:65: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:67: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:69: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:70: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:70: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:72: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:73: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:73: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:74: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:74: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:75: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:75: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:76: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:77: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:77: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:78: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:78: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:79: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:79: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:80: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:80: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:81: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:83: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:85: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:89: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:91: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:94: ERROR:POINTER_LOCATION: "foo** bar" should be "foo **bar"
+./lab_implem.c:96: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:96: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:96: CHECK:CAMELCASE: Avoid CamelCase: <currNode>
+./lab_implem.c:98: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:98: WARNING:BRACES: braces {} are not necessary for single statement blocks
+./lab_implem.c:99: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:99: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:100: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:102: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:103: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:103: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:104: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:104: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:105: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:105: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:106: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:106: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:107: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:107: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:108: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:110: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:111: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:114: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:116: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:116: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:118: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:119: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:119: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:119: ERROR:POINTER_LOCATION: "(foo*)" should be "(foo *)"
+./lab_implem.c:120: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:123: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:125: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:125: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:127: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:128: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:128: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:128: ERROR:POINTER_LOCATION: "(foo*)" should be "(foo *)"
+./lab_implem.c:129: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:135: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:135: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:136: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:138: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:139: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:141: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:142: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:144: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:148: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:150: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:154: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:156: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:159: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:159: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:161: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:162: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:162: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:164: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:167: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:169: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:170: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:170: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:172: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:174: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:175: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:176: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:179: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:179: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:181: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:181: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:182: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:183: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:183: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:185: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:186: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:187: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:189: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:190: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:191: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:193: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:196: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:198: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:199: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:200: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:200: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:202: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:203: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:203: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:205: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:206: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:207: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:210: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:212: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:213: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:213: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:215: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:216: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:217: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:222: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:228: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:230: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:230: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:231: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:233: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:234: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:236: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:237: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:237: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:239: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:241: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:244: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:246: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:246: CHECK:OPEN_ENDED_LINE: Lines should not end with a '('
+./lab_implem.c:247: CHECK:LONG_LINE: line length of 117 exceeds 80 columns
+./lab_implem.c:247: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:247: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:248: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:248: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:250: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:253: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:253: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:253: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:255: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:255: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:256: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:258: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:259: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:259: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:259: ERROR:POINTER_LOCATION: "(foo*)" should be "(foo *)"
+./lab_implem.c:260: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:260: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:261: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:261: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:262: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:262: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:264: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:264: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:265: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:267: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:270: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:272: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:274: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:274: CHECK:OPEN_ENDED_LINE: Lines should not end with a '('
+./lab_implem.c:275: CHECK:LONG_LINE: line length of 117 exceeds 80 columns
+./lab_implem.c:275: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:275: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:276: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:276: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:278: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:278: CHECK:COMPARISON_TO_NULL: Comparison to NULL could be written "find_node"
+./lab_implem.c:282: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:284: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:284: CHECK:OPEN_ENDED_LINE: Lines should not end with a '('
+./lab_implem.c:285: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:285: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:286: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:286: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:288: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:291: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:293: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:295: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:295: CHECK:OPEN_ENDED_LINE: Lines should not end with a '('
+./lab_implem.c:296: CHECK:LONG_LINE: line length of 117 exceeds 80 columns
+./lab_implem.c:296: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:296: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:297: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:297: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:299: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:300: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:300: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:302: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:303: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:304: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:307: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.c:309: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:311: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:312: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.c:312: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:314: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.c:315: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:9: CHECK:MACRO_ARG_REUSE: Macro argument reuse 'x' - possible side-effects?
+./lab_implem.h:9: CHECK:MACRO_ARG_REUSE: Macro argument reuse 'y' - possible side-effects?
+./lab_implem.h:11: ERROR:COMPLEX_MACRO: Macros with complex values should be enclosed in parentheses
+./lab_implem.h:14: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:15: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.h:15: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:16: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.h:16: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:17: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.h:17: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:18: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.h:18: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:19: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.h:19: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:20: ERROR:CODE_INDENT: code indent should use tabs where possible
+./lab_implem.h:20: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:21: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:32: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:32: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:33: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:33: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:37: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:37: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:38: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:39: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:43: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:44: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:45: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:46: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:47: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:48: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:48: ERROR:POINTER_LOCATION: "foo** bar" should be "foo **bar"
+./lab_implem.h:52: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:52: ERROR:POINTER_LOCATION: "foo** bar" should be "foo **bar"
+./lab_implem.h:53: WARNING:LEADING_SPACE: please, no spaces at the start of a line
+./lab_implem.h:56: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:57: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:57: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:58: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:58: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:59: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:59: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:60: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:61: ERROR:POINTER_LOCATION: "foo** bar" should be "foo **bar"
+./lab_implem.h:62: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:63: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:65: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:66: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:67: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:68: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:68: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:69: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:70: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:70: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:71: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:72: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:74: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:75: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:76: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:76: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:76: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:77: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:78: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:78: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:79: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./lab_implem.h:80: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+./users.c:37: ERROR:SPACING: space required before the open parenthesis '('

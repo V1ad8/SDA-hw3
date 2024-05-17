@@ -42,10 +42,8 @@ int main(void)
 
 	char *input = (char *)malloc(MAX_COMMAND_LEN);
 	while (1) {
-		input = fgets(input, MAX_COMMAND_LEN, stdin);
-
 		// If fgets returns null, we reached EOF
-		if (!input)
+		if (!fgets(input, MAX_COMMAND_LEN, stdin))
 			break;
 
 		#ifdef TASK_1
@@ -61,6 +59,8 @@ int main(void)
 		#endif
 	}
 
+	free_users();
+	free(input);
 	lg_free(users_graph);
 	return 0;
 }

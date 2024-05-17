@@ -4,6 +4,8 @@
 #define MAX_COMMAND_LEN 100
 #define MAX_PEOPLE 550
 
+#include "lab_implem.h"
+
 /**
  * Function that handles the calling of every command from task 1
  *

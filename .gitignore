@@ -10,3 +10,6 @@ feed
 checker/output/*.out
 checker/output/*.valgrind
 .checkpatch-camelcase.git.
+.github/workflows/checker.yml
+.github/workflows/checker.yml
+.github/workflows/publish.yml

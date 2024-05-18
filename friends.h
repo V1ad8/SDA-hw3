@@ -18,7 +18,7 @@ int nr_of_friends(list_graph_t *users, char *name);
 void common_friends(list_graph_t *users, char *name1, char *name2);
 void suggestions(list_graph_t *users, char *name);
 void popular(list_graph_t *users, char *name);
-void bfs(list_graph_t* lg, int start, int* visited, int* dist);
+void bfs(list_graph_t *lg, int start, int *visited, int *dist);
 void friend_distance(list_graph_t *users, char *name1, char *name2);
 
 #endif // FRIENDS_H

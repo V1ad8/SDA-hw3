@@ -94,7 +94,8 @@ void common_friends(list_graph_t *users, char *name1, char *name2) {
 	for (ll_node_t *node = users->neighbors[id2]->head; node;
 		 node = node->next) {
 		common[*(int *)node->data]++;
-		if (common[*(int *)node->data] == 2) exists = 1;
+		if (common[*(int *)node->data] == 2)
+			exists = 1;
 	}
 
 	if (!exists) {
@@ -124,7 +125,8 @@ void suggestions(list_graph_t *users, char *name) {
 	// check if there are suggestions
 	int exists = 0;
 
-	for (ll_node_t *node = users->neighbors[id]->head; node; node = node->next) {
+	for (ll_node_t *node = users->neighbors[id]->head; node;
+		 node = node->next) {
 		int friend_id = *(int *)node->data;
 		// go trough the friends of each friend of the given user
 		for (ll_node_t *frnd = users->neighbors[friend_id]->head; frnd;
@@ -158,7 +160,8 @@ void popular(list_graph_t *users, char *name) {
 	unsigned int max_friends = users->neighbors[id]->size;
 	int popular_id = id;  // id of the most popular friend
 
-	for (ll_node_t *node = users->neighbors[id]->head; node; node = node->next) {
+	for (ll_node_t *node = users->neighbors[id]->head; node;
+		 node = node->next) {
 		int fr_id = *(int *)node->data;
 		if (users->neighbors[fr_id]->size > max_friends) {
 			max_friends = users->neighbors[fr_id]->size;
@@ -206,9 +209,8 @@ void friend_distance(list_graph_t *users, char *name1, char *name2) {
 	int *dist = calloc(users->nodes, sizeof(int));
 	DIE(!dist, "calloc() failed\n");
 
-	for (int i = 0; i < users->nodes; i++) {
+	for (int i = 0; i < users->nodes; i++)
 		dist[i] = INF;
-	}
 
 	int id1 = get_user_id(name1);
 	int id2 = get_user_id(name2);

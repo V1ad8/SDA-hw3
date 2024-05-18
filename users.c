@@ -34,7 +34,7 @@ void init_users(void)
 }
 
 void free_users(void) {
-	for(int i = 0; i < users_number; i++)
+	for (int i = 0; i < users_number; i++)
 		if (users[i])
 			free(users[i]);
 

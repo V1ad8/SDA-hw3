@@ -68,16 +68,16 @@ ll_node_t *move_node_to_end(ll_list_t *list, void *key)
 		if (strcmp(((info_t *)node->data)->key, key) == 0) {
 			ll_node_t *prev = node->prev;
 			ll_node_t *next = node->next;
-			if (prev) {
+			if (prev)
 				prev->next = next;
-			} else {
+			else
 				list->head = next;
-			}
-			if (next) {
+
+			if (next)
 				next->prev = prev;
-			} else {
+			else
 				list->tail = prev;
-			}
+
 			list->size--;
 
 			break;
@@ -131,11 +131,9 @@ ll_node_t *ll_get_node(ll_list_t *list, void *key)
 	ll_node_t *node;
 
 	// Find the node with the given key
-	for (node = list->head; node; node = node->next) {
-		if (strcmp(((info_t *)node->data)->key, key) == 0) {
+	for (node = list->head; node; node = node->next)
+		if (strcmp(((info_t *)node->data)->key, key) == 0)
 			return node;
-		}
-	}
 
 	// If the node was not found, return NULL
 	return NULL;

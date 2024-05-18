@@ -9,3 +9,5 @@ feed
 .env
 checker/output/*.out
 checker/output/*.valgrind
+.checkpatch-camelcase.git.
+.gitignore

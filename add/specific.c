@@ -57,7 +57,7 @@ void tr_insert_post(tree_t *tree, post_t *data, tr_node_t *parent)
 {
 	if (!parent) {
 		tree->root = malloc(sizeof(tr_node_t));
-		tree->root->data = malloc(sizeof(post_t));
+		tree->root->data = calloc(1, sizeof(post_t));
 
 		((post_t *)tree->root->data)->events =
 			(tree_t *)strdup((char *)data->events);
@@ -74,7 +74,7 @@ void tr_insert_post(tree_t *tree, post_t *data, tr_node_t *parent)
 	tr_node_t *node = malloc(sizeof(tr_node_t));
 	DIE(node == NULL, "malloc");
 
-	node->data = malloc(sizeof(post_t));
+	node->data = calloc(1, sizeof(post_t));
 	DIE(!node->data, "malloc data");
 
 	((post_t *)node->data)->events = NULL;
@@ -91,4 +91,74 @@ void tr_insert_post(tree_t *tree, post_t *data, tr_node_t *parent)
 	// TO DO: free(node->data); uncommenting this breaks the program
 	// free(node->data);
 	free(node);
+}
+
+void tr_remove_hard(tr_node_t *node)
+{
+	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next) {
+		tr_remove_hard(curr->data);
+	}
+
+	ll_free(&(node->kid));
+	free(((post_t *)node->data)->events);
+	free(((post_t *)node->data)->title);
+
+	if (!node->par) {
+		free(node->data);
+		free(node);
+	}
+}
+
+void tr_destroy(tree_t **tree)
+{
+	tr_remove_hard((*tree)->root);
+	free(*tree);
+	*tree = NULL;
+}
+
+static tr_node_t *__get_post_by_id(tr_node_t *node, unsigned int post_id)
+{
+	if (!node)
+		return NULL;
+
+	if (((post_t *)node->data)->id == post_id)
+		return node;
+
+	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next) {
+		tr_node_t *found = __get_post_by_id(curr->data, post_id);
+		if (found)
+			return found;
+	}
+
+	return NULL;
+}
+
+tr_node_t *get_post_by_id(tree_t *tree, unsigned int post_id)
+{
+	return __get_post_by_id(tree->root, post_id);
+}
+
+tr_node_t *lca(tree_t *tree, tr_node_t *node1, tr_node_t *node2)
+{
+	if (node1 == NULL || node2 == NULL) {
+		return NULL;
+	}
+
+	unsigned int level1 = get_level(tree, node1);
+	unsigned int level2 = get_level(tree, node2);
+
+	for (; level1 > level2; level1--) {
+		node1 = node1->par;
+	}
+
+	for (; level2 > level1; level2--) {
+		node2 = node2->par;
+	}
+
+	while (((post_t *)node1->data)->id != ((post_t *)node2->data)->id) {
+		node1 = node1->par;
+		node2 = node2->par;
+	}
+
+	return node1;
 }

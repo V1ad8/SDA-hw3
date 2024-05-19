@@ -8,13 +8,6 @@ tree_t *tr_create(unsigned int data_size)
 	return tree;
 }
 
-void tr_destroy(tree_t **tree)
-{
-	tr_remove_hard((*tree)->root);
-	free(*tree);
-	*tree = NULL;
-}
-
 static tr_node_t *__tr_search(tr_node_t *node, void *data,
 							  unsigned int data_size)
 {
@@ -93,27 +86,28 @@ void tr_remove_soft(tree_t *tree, void *data)
 	free(node);
 }
 
-typedef struct post_t {
-	unsigned int id;
-	char *title;
-	unsigned int user_id;
-	tree_t *events;
-
-	bool likes[518];
-} post_t;
-
-void tr_remove_hard(tr_node_t *node)
+static unsigned int __get_level(tr_node_t *root, tr_node_t *node,
+								unsigned int level)
 {
-	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next) {
-		tr_remove_hard(curr->data);
+	if (root == NULL || node == NULL) {
+		return 0;
 	}
 
-	ll_free(&(node->kid));
-	free(((post_t *)node->data)->events);
-	free(((post_t *)node->data)->title);
-
-	if (!node->par) {
-		free(node->data);
-		free(node);
+	if (root == node) {
+		return level;
 	}
+
+	for (ll_node_t *curr = root->kid->head; curr; curr = curr->next) {
+		unsigned int lev = __get_level(curr->data, node, level + 1);
+		if (lev) {
+			return lev;
+		}
+	}
+
+	return 0;
+}
+
+unsigned int get_level(tree_t *tree, tr_node_t *node)
+{
+	return __get_level(tree->root, node, 1);
 }

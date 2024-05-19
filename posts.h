@@ -38,4 +38,8 @@ void like_post(ll_list_t *posts, char *user, char *text);
 
 void get_reposts(ll_list_t *posts, char *text);
 
+void common_repost(ll_list_t *posts, char *text);
+
+void get_likes(ll_list_t *posts, char *text);
+
 #endif // POSTS_H

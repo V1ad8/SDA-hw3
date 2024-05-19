@@ -8,4 +8,10 @@ ll_node_t *ll_add_nth_post(ll_list_t *list, unsigned int n, post_t *new_data);
 
 void tr_insert_post(tree_t *tree, post_t *data, tr_node_t *parent);
 
+void tr_remove_hard(tr_node_t *node);
+
+void tr_destroy(tree_t **tree);
+
+tr_node_t *get_post_by_id(tree_t *tree, unsigned int post_id);
+
 #endif // SPECIFIC_LL_H

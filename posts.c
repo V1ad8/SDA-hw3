@@ -24,12 +24,13 @@ void handle_input_posts(char *input, ll_list_t *posts)
 
 	} else if (!strcmp(cmd, "repost")) {
 		user = strtok(NULL, "\n ");
-		text = strtok(NULL, "\n ");
+		text = commands + strlen(cmd) + strlen(user) + 2;
 
 		repost_post(posts, user, text);
 	} else if (!strcmp(cmd, "common-repost")) {
-		(void)cmd;
-		// TODO: Add function
+		text = commands + strlen(cmd) + 1;
+
+		common_repost(posts, text);
 	} else if (!strcmp(cmd, "like")) {
 		user = strtok(NULL, "\n ");
 		text = strtok(NULL, "\n ");
@@ -42,15 +43,13 @@ void handle_input_posts(char *input, ll_list_t *posts)
 		(void)cmd;
 		// TODO: Add function
 	} else if (!strcmp(cmd, "get-likes")) {
-		(void)cmd;
-		// TODO: Add function
+		text = commands + strlen(cmd) + 1;
+
+		get_likes(posts, text);
 	} else if (!strcmp(cmd, "get-reposts")) {
 		text = strtok(NULL, "\n ");
 
 		get_reposts(posts, text);
-	} else if (!strcmp(cmd, "get-likes")) {
-		(void)cmd;
-		// TODO: Add function
 	}
 
 	free(commands);
@@ -118,15 +117,15 @@ post_t *get_post(ll_list_t *posts, unsigned int post_id)
 	return NULL;
 }
 
-tr_node_t *get_post_by_id(tr_node_t *node, unsigned int post_id)
+tr_node_t *get_post_from_kid(tr_node_t *node, unsigned int post_id)
 {
 	if (node == NULL || ll_get_size(node->kid) == 0) {
 		return NULL;
 	}
 
 	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next) {
-		if (((post_t *)node->data)->id == post_id) {
-			return node;
+		if (((post_t *)((tr_node_t *)curr->data)->data)->id == post_id) {
+			return curr->data;
 		}
 	}
 
@@ -151,7 +150,7 @@ void repost_post(ll_list_t *posts, char *user, char *text)
 
 	unsigned int post_id;
 	sscanf(text, "%d", &post_id);
-	text += number_of_digits(post_id) + 1;
+	text += number_of_digits(post_id);
 
 	post_t *post = get_post(posts, post_id);
 
@@ -163,14 +162,12 @@ void repost_post(ll_list_t *posts, char *user, char *text)
 	tr_node_t *node = post->events->root;
 	tr_node_t *tmp = NULL;
 
-	while (sscanf(text, "%d", &repost_id)) {
-		tmp = get_post_by_id(node, repost_id);
-		if (!tmp) {
-			break;
-		}
+	if (sscanf(text, "%d", &repost_id)) {
+		tmp = get_post_by_id(post->events, repost_id);
 
-		node = tmp;
-		text += number_of_digits(repost_id);
+		if (tmp) {
+			node = tmp;
+		}
 	}
 
 	tr_insert_post(post->events, repost, node);
@@ -179,7 +176,7 @@ void repost_post(ll_list_t *posts, char *user, char *text)
 
 	free(repost);
 
-	printf("Created Repost #%d for %s\n", repost_id, user);
+	printf("Created repost #%d for %s\n", repost_id, user);
 }
 
 void like_post(ll_list_t *posts, char *user, char *text)
@@ -198,17 +195,29 @@ void like_post(ll_list_t *posts, char *user, char *text)
 	tr_node_t *node = post->events->root;
 	tr_node_t *tmp = NULL;
 
-	while (sscanf(text, "%d", &repost_id)) {
-		tmp = get_post_by_id(node, repost_id);
-		if (!tmp) {
-			break;
-		}
+	if (sscanf(text, "%d", &repost_id)) {
+		tmp = get_post_by_id(post->events, repost_id);
 
-		node = tmp;
-		text += number_of_digits(repost_id) + 1;
+		if (tmp) {
+			node = tmp;
+		}
 	}
 
-	((post_t *)node->data)->likes[get_user_id(user)] = true;
+	printf("User %s ", user);
+
+	((post_t *)node->data)->likes[get_user_id(user)] =
+		!((post_t *)node->data)->likes[get_user_id(user)];
+
+	if (!((post_t *)node->data)->likes[get_user_id(user)]) {
+		printf("un");
+	}
+
+	printf("liked ");
+
+	if (repost_id)
+		printf("repost \"%s\"\n", post->title);
+	else
+		printf("post \"%s\"\n", ((post_t *)node->data)->title);
 }
 
 void __get_reposts(tr_node_t *node)
@@ -242,14 +251,12 @@ void get_reposts(ll_list_t *posts, char *text)
 	tr_node_t *node = post->events->root;
 	tr_node_t *tmp = NULL;
 
-	while (sscanf(text, "%d", &repost_id)) {
-		tmp = get_post_by_id(node, repost_id);
-		if (!tmp) {
-			break;
-		}
+	if (sscanf(text, "%d", &repost_id)) {
+		tmp = get_post_by_id(post->events, repost_id);
 
-		node = tmp;
-		text += number_of_digits(repost_id) + 1;
+		if (tmp) {
+			node = tmp;
+		}
 	}
 
 	printf("\"%s\" - Post by %s\n", post->title, get_user_name(post->user_id));
@@ -257,4 +264,64 @@ void get_reposts(ll_list_t *posts, char *text)
 	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next) {
 		__get_reposts(curr->data);
 	}
+}
+
+void common_repost(ll_list_t *posts, char *text)
+{
+	unsigned int post_id;
+	unsigned int repost_id1;
+	unsigned int repost_id2;
+	sscanf(text, "%d %d %d", &post_id, &repost_id1, &repost_id2);
+
+	post_t *post = get_post(posts, post_id);
+
+	tr_node_t *node1 = get_post_by_id(post->events, repost_id1);
+	tr_node_t *node2 = get_post_by_id(post->events, repost_id2);
+
+	if (!node1 || !node2) {
+		return;
+	}
+
+	tr_node_t *lca_node = lca(post->events, node1, node2);
+
+	printf("The first common repost of %d and %d is %d\n", repost_id1,
+		   repost_id2, ((post_t *)lca_node->data)->id);
+}
+
+void get_likes(ll_list_t *posts, char *text)
+{
+	unsigned int post_id;
+	sscanf(text, "%d", &post_id);
+	text += number_of_digits(post_id);
+
+	post_t *post = get_post(posts, post_id);
+
+	if (!post) {
+		return;
+	}
+
+	unsigned int repost_id = 0;
+	tr_node_t *node = post->events->root;
+	tr_node_t *tmp = NULL;
+
+	if (sscanf(text, "%d", &repost_id)) {
+		tmp = get_post_by_id(post->events, repost_id);
+
+		if (tmp) {
+			node = tmp;
+		}
+	}
+
+	unsigned int likes = 0;
+
+	for (unsigned int i = 0; i < MAX_USERS; i++) {
+		if (((post_t *)node->data)->likes[i]) {
+			likes++;
+		}
+	}
+
+	if (!repost_id)
+		printf("Post \"%s\" has %d likes\n", post->title, likes);
+	else
+		printf("Repost #%d has %d likes\n", ((post_t *)node->data)->id, likes);
 }

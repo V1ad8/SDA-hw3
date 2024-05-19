@@ -1,7 +1,7 @@
 #ifndef FRIENDS_H
 #define FRIENDS_H
 
-#define MAX_COMMAND_LEN 100
+#define MAX_COMMAND_LEN 300
 #define MAX_PEOPLE 550
 
 #include "lab_implem.h"

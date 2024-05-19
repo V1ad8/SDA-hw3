@@ -4,7 +4,7 @@
 #include "linked_list.h"
 
 typedef struct tr_node_t {
-	struct tree_t *par;
+	struct tr_node_t *par;
 	void *data;
 	ll_list_t *kid;
 } tr_node_t;
@@ -14,16 +14,16 @@ typedef struct tree_t {
 	unsigned int data_size;
 } tree_t;
 
-tree_t *tree_create(unsigned int data_size);
+tree_t *tr_create(unsigned int data_size);
 
-void tree_destroy(tree_t *tree);
+void tr_destroy(tree_t **tree);
 
-tree_t *tree_search(tree_t *tree, void *data);
+tr_node_t *tr_search(tree_t *tree, void *data);
 
-void tree_insert(tree_t *tree, void *data);
+void tr_insert(tree_t *tree, void *data, tr_node_t *parent);
 
-void tree_remove_soft(tree_t *tree, void *data);
+void tr_remove_soft(tree_t *tree, void *data);
 
-void tree_remove_hard(tree_t *tree, void *data);
+void tr_remove_hard(tr_node_t *node);
 
 #endif // TREE_H

@@ -1,6 +1,6 @@
 #include "tree.h"
 
-tree_t *tree_create(unsigned int data_size)
+tree_t *tr_create(unsigned int data_size)
 {
 	tree_t *tree = malloc(sizeof(tree_t));
 	tree->data_size = data_size;
@@ -8,14 +8,15 @@ tree_t *tree_create(unsigned int data_size)
 	return tree;
 }
 
-void tree_destroy(tree_t *tree)
+void tr_destroy(tree_t **tree)
 {
-	tree_remove_hard(tree, tree->root->data);
-	free(tree);
+	tr_remove_hard((*tree)->root);
+	free(*tree);
+	*tree = NULL;
 }
 
-static tr_node_t *__tree_search(tr_node_t *node, void *data,
-								unsigned int data_size)
+static tr_node_t *__tr_search(tr_node_t *node, void *data,
+							  unsigned int data_size)
 {
 	if (node == NULL || data == NULL || node->kid == NULL ||
 		ll_get_size(node->kid) == 0) {
@@ -27,7 +28,7 @@ static tr_node_t *__tree_search(tr_node_t *node, void *data,
 	}
 
 	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next) {
-		tr_node_t *found = __tree_search(curr->data, data, data_size);
+		tr_node_t *found = __tr_search(curr->data, data, data_size);
 		if (found != NULL) {
 			return found;
 		}
@@ -36,12 +37,12 @@ static tr_node_t *__tree_search(tr_node_t *node, void *data,
 	return NULL;
 }
 
-tree_t *tree_search(tree_t *tree, void *data)
+tr_node_t *tr_search(tree_t *tree, void *data)
 {
-	return __tree_search(tree->root, data, tree->data_size);
+	return __tr_search(tree->root, data, tree->data_size);
 }
 
-void tree_insert(tree_t *tree, void *data)
+void tr_insert(tree_t *tree, void *data, tr_node_t *parent)
 {
 	tr_node_t *node = malloc(sizeof(tr_node_t));
 	DIE(node == NULL, "malloc");
@@ -50,27 +51,24 @@ void tree_insert(tree_t *tree, void *data)
 	DIE(node->data == NULL, "malloc");
 
 	memcpy(node->data, data, tree->data_size);
-	node->kid = ll_create(tree->data_size);
-	node->par = NULL;
+	node->kid = ll_create(sizeof(tr_node_t));
+	node->par = parent;
 
-	if (tree->root == NULL) {
+	if (parent == NULL) {
 		tree->root = node;
 		return;
 	}
 
-	tr_node_t *parent = tree_search(tree, data);
-	DIE(parent == NULL, "search");
-
-	parent = parent->par;
-
-	node->par = parent;
-	ll_add_nth(parent->kid, ll_get_size(parent->kid), node);
+	ll_add_nth_node(parent->kid, ll_get_size(parent->kid), node);
 }
 
-void tree_remove_soft(tree_t *tree, void *data)
+void tr_remove_soft(tree_t *tree, void *data)
 {
-	tr_node_t *node = tree_search(tree, data);
-	DIE(node == NULL, "search");
+	tr_node_t *node = tr_search(tree, data);
+
+	if (node == NULL) {
+		return;
+	}
 
 	tr_node_t *parent = node->par;
 	ll_node_t *curr = parent->kid->head;
@@ -82,7 +80,7 @@ void tree_remove_soft(tree_t *tree, void *data)
 
 	DIE(curr == NULL, "search");
 
-	free(ll_get_nth_node(parent->kid, curr)->data);
+	free(ll_remove_node(parent->kid, curr)->data);
 	free(ll_remove_node(parent->kid, curr));
 
 	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next) {
@@ -91,35 +89,31 @@ void tree_remove_soft(tree_t *tree, void *data)
 	}
 
 	free(node->data);
-	ll_free(node->kid);
+	ll_free(&(node->kid));
 	free(node);
 }
 
-void tree_remove_hard(tree_t *tree, void *data)
+typedef struct post_t {
+	unsigned int id;
+	char *title;
+	unsigned int user_id;
+	tree_t *events;
+
+	bool likes[518];
+} post_t;
+
+void tr_remove_hard(tr_node_t *node)
 {
-	tr_node_t *node = tree_search(tree, data);
-	DIE(node == NULL, "search");
-
-	tr_node_t *parent = node->par;
-	ll_node_t *curr = parent->kid->head;
-	for (; curr; curr = curr->next) {
-		if (curr->data == node) {
-			break;
-		}
+	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next) {
+		tr_remove_hard(curr->data);
 	}
 
-	DIE(curr == NULL, "search");
+	ll_free(&(node->kid));
+	free(((post_t *)node->data)->events);
+	free(((post_t *)node->data)->title);
 
-	free(ll_get_nth_node(parent->kid, curr)->data);
-	free(ll_remove_node(parent->kid, curr));
-
-	while (ll_get_size(node->kid) > 0) {
-		tr_node_t *kid = ll_remove_node(node->kid, 0)->data;
-		tree_remove_hard(tree, kid->data);
-		free(kid);
+	if (!node->par) {
+		free(node->data);
+		free(node);
 	}
-
-	free(node->data);
-	ll_free(node->kid);
-	free(node);
 }

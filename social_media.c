@@ -16,17 +16,17 @@
 */
 void init_tasks(void)
 {
-	#ifdef TASK_1
+#ifdef TASK_1
 
-	#endif
+#endif
 
-	#ifdef TASK_2
+#ifdef TASK_2
 
-	#endif
+#endif
 
-	#ifdef TASK_3
+#ifdef TASK_3
 
-	#endif
+#endif
 }
 
 /**
@@ -39,6 +39,9 @@ int main(void)
 	init_tasks();
 
 	list_graph_t *users_graph = lg_create(MAX_PEOPLE);
+	ll_list_t *posts = ll_create(sizeof(post_t));
+
+	posts->head = NULL;
 
 	char *input = (char *)malloc(MAX_COMMAND_LEN);
 	while (1) {
@@ -46,21 +49,29 @@ int main(void)
 		if (!fgets(input, MAX_COMMAND_LEN, stdin))
 			break;
 
-		#ifdef TASK_1
+#ifdef TASK_1
 		handle_input_friends(input, users_graph);
-		#endif
+#endif
 
-		#ifdef TASK_2
-		handle_input_posts(input);
-		#endif
+#ifdef TASK_2
+		handle_input_posts(input, posts);
+#endif
 
-		#ifdef TASK_3
+#ifdef TASK_3
 		handle_input_feed(input);
-		#endif
+#endif
 	}
 
 	free_users();
 	free(input);
 	lg_free(users_graph);
+
+	for (ll_node_t *node = posts->head; node; node = node->next) {
+		post_t *post = (post_t *)node->data;
+		free(post->title);
+		tr_destroy(&post->events);
+	}
+
+	ll_free(&posts);
 	return 0;
 }

@@ -6,15 +6,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "add/linked_list.h"
-#include "add/queue.h"
-#include "utils.h"
+#include "linked_list.h"
+#include "queue.h"
+#include "../utils.h"
 
 #define MIN(x, y) ((x) < (y) ? (x) : (y))
 
-#define INF 1 << 30
-
-#define MAX_QUEUE_SIZE 100
+#define INF (1 << 30)
 
 typedef struct list_graph_t list_graph_t;
 

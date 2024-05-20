@@ -11,20 +11,16 @@ tree_t *tr_create(unsigned int data_size)
 static tr_node_t *__tr_search(tr_node_t *node, void *data,
 							  unsigned int data_size)
 {
-	if (node == NULL || data == NULL || node->kid == NULL ||
-		ll_get_size(node->kid) == 0) {
+	if (!node || !data || !node->kid || !ll_get_size(node->kid))
 		return NULL;
-	}
 
-	if (memcmp(node->data, data, data_size) == 0) {
+	if (memcmp(node->data, data, data_size) == 0)
 		return node;
-	}
 
 	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next) {
 		tr_node_t *found = __tr_search(curr->data, data, data_size);
-		if (found != NULL) {
+		if (found)
 			return found;
-		}
 	}
 
 	return NULL;
@@ -38,16 +34,16 @@ tr_node_t *tr_search(tree_t *tree, void *data)
 void tr_insert(tree_t *tree, void *data, tr_node_t *parent)
 {
 	tr_node_t *node = malloc(sizeof(tr_node_t));
-	DIE(node == NULL, "malloc");
+	DIE(!node, "malloc");
 
 	node->data = malloc(tree->data_size);
-	DIE(node->data == NULL, "malloc");
+	DIE(!node->data, "malloc");
 
 	memcpy(node->data, data, tree->data_size);
 	node->kid = ll_create(sizeof(tr_node_t));
 	node->par = parent;
 
-	if (parent == NULL) {
+	if (!parent) {
 		tree->root = node;
 		return;
 	}
@@ -59,19 +55,17 @@ void tr_remove_soft(tree_t *tree, void *data)
 {
 	tr_node_t *node = tr_search(tree, data);
 
-	if (node == NULL) {
+	if (!node)
 		return;
-	}
 
 	tr_node_t *parent = node->par;
 	ll_node_t *curr = parent->kid->head;
 	for (; curr; curr = curr->next) {
-		if (curr->data == node) {
+		if (curr->data == node)
 			break;
-		}
 	}
 
-	DIE(curr == NULL, "search");
+	DIE(!curr, "search");
 
 	free(ll_remove_node(parent->kid, curr)->data);
 	free(ll_remove_node(parent->kid, curr));
@@ -82,26 +76,23 @@ void tr_remove_soft(tree_t *tree, void *data)
 	}
 
 	free(node->data);
-	ll_free(&(node->kid));
+	ll_free(&node->kid);
 	free(node);
 }
 
 static unsigned int __get_level(tr_node_t *root, tr_node_t *node,
 								unsigned int level)
 {
-	if (root == NULL || node == NULL) {
+	if (!root || !node)
 		return 0;
-	}
 
-	if (root == node) {
+	if (root == node)
 		return level;
-	}
 
 	for (ll_node_t *curr = root->kid->head; curr; curr = curr->next) {
 		unsigned int lev = __get_level(curr->data, node, level + 1);
-		if (lev) {
+		if (lev)
 			return lev;
-		}
 	}
 
 	return 0;

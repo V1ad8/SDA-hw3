@@ -9,7 +9,6 @@
 #include "friends.h"
 #include "posts.h"
 #include "feed.h"
-#include "lab_implem.h"
 
 /**
  * Initializez every task based on which task we are running

@@ -1,10 +1,4 @@
 #include "friends.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include "lab_implem.h"
 #include "users.h"
 
 void handle_input_friends(char *input, list_graph_t *users_graph) {

@@ -14,8 +14,8 @@ typedef struct hashtable_t {
 	ll_list_t **buckets;
 	unsigned int size;
 	unsigned int hmax;
-	unsigned int (*hash_function)(void *);
-	int (*compare_function)(void *, void *);
+	unsigned int (*hash_function)(void *key);
+	int (*compare_function)(void *key1, void *key2);
 } hashtable_t;
 
 hashtable_t *ht_create(unsigned int hmax, unsigned int (*hash_function)(void *),

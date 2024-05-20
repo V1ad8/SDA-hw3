@@ -1,5 +1,4 @@
-#include "lab_implem.h"
-
+#include "graph.h"
 
 int is_node_in_graph(int n, int nodes)
 {

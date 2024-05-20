@@ -33,7 +33,7 @@ void handle_input_posts(char *input, ll_list_t *posts)
 		common_repost(posts, text);
 	} else if (!strcmp(cmd, "like")) {
 		user = strtok(NULL, "\n ");
-		text = strtok(NULL, "\n ");
+		text = commands + strlen(cmd) + strlen(user) + 2;
 
 		like_post(posts, user, text);
 	} else if (!strcmp(cmd, "ratio")) {
@@ -183,9 +183,9 @@ void repost_post(ll_list_t *posts, char *user, char *text)
 
 void like_post(ll_list_t *posts, char *user, char *text)
 {
-	unsigned int post_id;
+	unsigned int post_id = 0;
 	sscanf(text, "%d", &post_id);
-	text += number_of_digits(post_id) + 1;
+	text += number_of_digits(post_id);
 
 	post_t *post = get_post(posts, post_id);
 
@@ -219,7 +219,7 @@ void like_post(ll_list_t *posts, char *user, char *text)
 	if (repost_id)
 		printf("repost \"%s\"\n", post->title);
 	else
-		printf("post \"%s\"\n", ((post_t *)node->data)->title);
+		printf("post \"%s\"\n", post->title);
 }
 
 void __get_reposts(tr_node_t *node)

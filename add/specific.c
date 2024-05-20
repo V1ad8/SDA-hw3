@@ -2,7 +2,8 @@
 #include "../users.h"
 #include "specific.h"
 
-ll_node_t *ll_add_nth_post(ll_list_t *list, unsigned int n, post_t *new_data)
+ll_node_t *ll_add_nth_post(ll_list_t *list, unsigned int n,
+						   const post_t *new_data)
 {
 	ll_node_t *new_node, *prev_node;
 
@@ -86,10 +87,10 @@ void tr_insert_post(tree_t *tree, post_t *data, tr_node_t *parent)
 	node->kid = ll_create(sizeof(tr_node_t));
 	node->par = parent;
 
-	ll_add_nth_node(parent->kid, ll_get_size(parent->kid), node);
+	ll_add_nth_tree(parent->kid, ll_get_size(parent->kid), node);
 
 	// TO DO: free(node->data); uncommenting this breaks the program
-	// free(node->data);
+	free(node->data);
 	free(node);
 }
 
@@ -102,9 +103,9 @@ void tr_remove_hard(tr_node_t *node)
 	ll_free(&(node->kid));
 	free(((post_t *)node->data)->events);
 	free(((post_t *)node->data)->title);
+	free(node->data);
 
 	if (!node->par) {
-		free(node->data);
 		free(node);
 	}
 }
@@ -161,4 +162,63 @@ tr_node_t *lca(tree_t *tree, tr_node_t *node1, tr_node_t *node2)
 	}
 
 	return node1;
+}
+
+ll_node_t *ll_add_nth_tree(ll_list_t *list, unsigned int n,
+						   const tr_node_t *new_data)
+{
+	ll_node_t *new_node, *prev_node;
+
+	if (!list)
+		return NULL;
+
+	if (n > list->size)
+		return NULL;
+
+	new_node = calloc(1, sizeof(ll_node_t));
+	DIE(!new_node, "malloc node");
+
+	new_node->data = malloc(sizeof(tr_node_t));
+	DIE(!new_node->data, "malloc data");
+
+	((tr_node_t *)new_node->data)->kid = new_data->kid;
+	((tr_node_t *)new_node->data)->par = new_data->par;
+
+	((tr_node_t *)new_node->data)->data = calloc(1, sizeof(post_t));
+	DIE(!((tr_node_t *)new_node->data)->data, "malloc data");
+
+	if (((post_t *)new_data->data)->title) {
+		((post_t *)((tr_node_t *)new_node->data)->data)->events =
+			(tree_t *)strdup((char *)((post_t *)new_data->data)->events);
+		((post_t *)((tr_node_t *)new_node->data)->data)->title =
+			strdup(((post_t *)new_data->data)->title);
+	}
+
+	((post_t *)((tr_node_t *)new_node->data)->data)->id =
+		((post_t *)new_data->data)->id;
+	((post_t *)((tr_node_t *)new_node->data)->data)->user_id =
+		((post_t *)new_data->data)->user_id;
+
+	if (n == 0) {
+		new_node->next = list->head;
+		if (list->head)
+			list->head->prev = new_node;
+		list->head = new_node;
+		if (!list->tail)
+			list->tail = new_node;
+	} else if (n == list->size) {
+		new_node->prev = list->tail;
+		list->tail->next = new_node;
+		list->tail = new_node;
+	} else {
+		prev_node = ll_get_nth_node(list, n - 1);
+		new_node->prev = prev_node;
+		new_node->next = prev_node->next;
+		prev_node->next->prev = new_node;
+		prev_node->next = new_node;
+	}
+
+	++list->size;
+
+	return new_node;
 }

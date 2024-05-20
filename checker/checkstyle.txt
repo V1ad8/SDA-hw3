@@ -1,6 +1,3 @@
-./add/graph.c:60: CHECK:COMPARISON_TO_NULL: Comparison to NULL could be written "find_node"
-./add/graph.h:13: CHECK:MACRO_ARG_REUSE: Macro argument reuse 'x' - possible side-effects?
-./add/graph.h:13: CHECK:MACRO_ARG_REUSE: Macro argument reuse 'y' - possible side-effects?
 ./add/specific.c:76: CHECK:COMPARISON_TO_NULL: Comparison to NULL could be written "!node"
 ./add/specific.c:99: WARNING:BRACES: braces {} are not necessary for single statement blocks
 ./add/specific.c:103: CHECK:UNNECESSARY_PARENTHESES: Unnecessary parentheses around node->kid
@@ -17,12 +14,3 @@
 ./friends.h:21: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
 ./friends.h:21: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
 ./friends.h:21: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
-./posts_add.c:24: CHECK:COMPARISON_TO_NULL: Comparison to NULL could be written "curr"
-./posts_add.c:25: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./posts_add.c:55: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./posts_add.c:63: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./posts_add.c:75: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./posts_add.c:94: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./posts_add.c:106: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./posts_add.h:36: WARNING:MISSING_EOF_NEWLINE: adding a line without newline at end of file
-./users.c:37: ERROR:SPACING: space required before the open parenthesis '('

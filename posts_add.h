@@ -1,6 +1,8 @@
 #ifndef POSTS_ADD_H
 #define POSTS_ADD_H
 
+#include "posts.h"
+
 // @brief Function to read a string placed in between quotation marks
 // @param input The file from which to read the block of memory
 // @return The string read from the file

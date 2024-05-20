@@ -10,7 +10,12 @@
 #include "queue.h"
 #include "../utils.h"
 
-#define MIN(x, y) ((x) < (y) ? (x) : (y))
+#define MIN(x, y)           \
+	({                      \
+		typeof(x) _x = (x); \
+		typeof(y) _y = (y); \
+		_x < _y ? _x : _y;  \
+	})
 
 #define INF (1 << 30)
 

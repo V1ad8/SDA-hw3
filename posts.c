@@ -96,7 +96,7 @@ post_t *create_post(ll_list_t *posts, char *user, char *title)
 	post->user_id = get_user_id(user);
 
 	// Initialize the likes array
-	for (unsigned int i = 0; i < MAX_USERS; i++)
+	for (unsigned int i = 0; i < MAX_PEOPLE; i++)
 		post->likes[i] = false;
 
 	// If the title is not NULL, create a new post

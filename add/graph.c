@@ -57,7 +57,7 @@ int lg_has_edge(list_graph_t *graph, int src, int dest)
 		!is_node_in_graph(dest, graph->nodes))
 		return 0;
 
-	return find_node(graph->neighbors[src], dest, &pos) != NULL;
+	return !(!find_node(graph->neighbors[src], dest, &pos));
 }
 
 ll_list_t *lg_get_neighbours(list_graph_t *graph, int node)

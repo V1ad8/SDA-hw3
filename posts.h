@@ -4,8 +4,7 @@
 #include "add/tree.h"
 #include "users.h"
 #include "utils.h"
-
-#define MAX_USERS 518
+#include "friends.h"
 
 typedef struct post_t {
 	unsigned int id;
@@ -13,13 +12,11 @@ typedef struct post_t {
 	unsigned int user_id;
 	tree_t *events;
 
-	bool likes[MAX_USERS];
+	bool likes[MAX_PEOPLE];
 } post_t;
 
 #include "add/specific.h"
 #include "posts_add.h"
-
-#define MAX_TITLE 280
 
 /**
  * Function that handles the calling of every command from task 2

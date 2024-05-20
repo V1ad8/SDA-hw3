@@ -37,17 +37,19 @@ void handle_input_posts(char *input, ll_list_t *posts)
 
 		like_post(posts, user, text);
 	} else if (!strcmp(cmd, "ratio")) {
-		(void)cmd;
-		// TODO: Add function
+		text = commands + strlen(cmd) + 1;
+
+		ratio(posts, text);
 	} else if (!strcmp(cmd, "delete")) {
-		(void)cmd;
-		// TODO: Add function
+		text = commands + strlen(cmd) + 1;
+
+		delete_post(posts, text);
 	} else if (!strcmp(cmd, "get-likes")) {
 		text = commands + strlen(cmd) + 1;
 
 		get_likes(posts, text);
 	} else if (!strcmp(cmd, "get-reposts")) {
-		text = strtok(NULL, "\n ");
+		text = commands + strlen(cmd) + 1;
 
 		get_reposts(posts, text);
 	}
@@ -259,7 +261,13 @@ void get_reposts(ll_list_t *posts, char *text)
 		}
 	}
 
-	printf("\"%s\" - Post by %s\n", post->title, get_user_name(post->user_id));
+	if (!repost_id)
+		printf("\"%s\" - Post by %s\n", post->title,
+			   get_user_name(post->user_id));
+	else {
+		printf("Repost #%d by %s\n", ((post_t *)node->data)->id,
+			   get_user_name(((post_t *)node->data)->user_id));
+	}
 
 	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next) {
 		__get_reposts(curr->data);
@@ -288,6 +296,19 @@ void common_repost(ll_list_t *posts, char *text)
 		   repost_id2, ((post_t *)lca_node->data)->id);
 }
 
+unsigned int count_likes(post_t *post)
+{
+	unsigned int likes = 0;
+
+	for (unsigned int i = 0; i < MAX_USERS; i++) {
+		if (post->likes[i]) {
+			likes++;
+		}
+	}
+
+	return likes;
+}
+
 void get_likes(ll_list_t *posts, char *text)
 {
 	unsigned int post_id;
@@ -312,16 +333,107 @@ void get_likes(ll_list_t *posts, char *text)
 		}
 	}
 
-	unsigned int likes = 0;
-
-	for (unsigned int i = 0; i < MAX_USERS; i++) {
-		if (((post_t *)node->data)->likes[i]) {
-			likes++;
-		}
-	}
+	unsigned int likes = count_likes(node->data);
 
 	if (!repost_id)
 		printf("Post \"%s\" has %d likes\n", post->title, likes);
 	else
 		printf("Repost #%d has %d likes\n", ((post_t *)node->data)->id, likes);
+}
+
+static tr_node_t *get_top_post(tr_node_t *node, unsigned int *top_likes)
+{
+	if (!node)
+		return NULL;
+
+	unsigned int likes = count_likes(node->data);
+	if (likes > *top_likes) {
+		*top_likes = likes;
+	}
+
+	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next) {
+		tr_node_t *found = get_top_post(curr->data, top_likes);
+		if (found)
+			return found;
+	}
+
+	if (likes == *top_likes) {
+		return node;
+	}
+
+	return NULL;
+}
+
+void ratio(ll_list_t *posts, char *text)
+{
+	unsigned int post_id;
+	sscanf(text, "%d", &post_id);
+
+	post_t *post = get_post(posts, post_id);
+
+	unsigned int op_likes = count_likes(post->events->root->data);
+	unsigned int likes = op_likes;
+
+	tr_node_t *node = get_top_post(post->events->root, &likes);
+
+	if (op_likes == likes) {
+		printf("The original post is the highest rated\n");
+	} else {
+		printf("Post %d got ratio'd by repost %d\n", post_id,
+			   ((post_t *)node->data)->id);
+	}
+}
+
+void delete_post(ll_list_t *posts, char *text)
+{
+	unsigned int post_id;
+	sscanf(text, "%d", &post_id);
+	text += number_of_digits(post_id);
+
+	post_t *post = get_post(posts, post_id);
+
+	if (!post) {
+		return;
+	}
+
+	unsigned int repost_id = 0;
+	tr_node_t *node = post->events->root;
+	tr_node_t *tmp = NULL;
+
+	if (sscanf(text, "%d", &repost_id)) {
+		tmp = get_post_by_id(post->events, repost_id);
+
+		if (tmp) {
+			node = tmp;
+		}
+	}
+
+	ll_node_t *removed;
+
+	if (repost_id) {
+		for (ll_node_t *curr = node->par->kid->head; curr; curr = curr->next) {
+			if (((post_t *)((tr_node_t *)curr->data)->data)->id ==
+				((post_t *)node->data)->id) {
+				removed = ll_remove_node(node->par->kid, curr);
+				break;
+			}
+		}
+
+		printf("Deleted repost #%d of post \"%s\"\n",
+			   ((post_t *)node->data)->id, post->title);
+	} else {
+		for (ll_node_t *curr = posts->head; curr; curr = curr->next) {
+			if (((post_t *)curr->data)->id == post_id) {
+				removed = ll_remove_node(posts, curr);
+				break;
+			}
+		}
+
+		printf("Deleted post \"%s\"\n", post->title);
+	}
+
+	tr_remove_hard(node);
+
+	free(removed->data);
+	free(removed);
 }

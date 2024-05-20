@@ -42,4 +42,8 @@ void common_repost(ll_list_t *posts, char *text);
 
 void get_likes(ll_list_t *posts, char *text);
 
+void ratio(ll_list_t *posts, char *text);
+
+void delete_post(ll_list_t *posts, char *text);
+
 #endif // POSTS_H

@@ -1,7 +1,8 @@
 #include "friends.h"
 #include "users.h"
 
-void handle_input_friends(char *input, list_graph_t *users_graph) {
+void handle_input_friends(char *input, list_graph_t *users_graph)
+{
 	char *commands = strdup(input);
 	char *cmd = strtok(commands, "\n ");
 
@@ -39,7 +40,8 @@ void handle_input_friends(char *input, list_graph_t *users_graph) {
 	free(commands);
 }
 
-void add_friend(list_graph_t *users, char *name1, char *name2) {
+void add_friend(list_graph_t *users, char *name1, char *name2)
+{
 	// get the id's of both people
 	int name1_id = get_user_id(name1);
 	int name2_id = get_user_id(name2);
@@ -51,7 +53,8 @@ void add_friend(list_graph_t *users, char *name1, char *name2) {
 	printf("Added connection %s - %s\n", name1, name2);
 }
 
-void remove_friend(list_graph_t *users, char *name1, char *name2) {
+void remove_friend(list_graph_t *users, char *name1, char *name2)
+{
 	// get the id's of both people
 	int name1_id = get_user_id(name1);
 	int name2_id = get_user_id(name2);
@@ -63,12 +66,14 @@ void remove_friend(list_graph_t *users, char *name1, char *name2) {
 	printf("Removed connection %s - %s\n", name1, name2);
 }
 
-int nr_of_friends(list_graph_t *users, char *name) {
+int nr_of_friends(list_graph_t *users, char *name)
+{
 	int id = get_user_id(name);
 	return users->neighbors[id]->size;
 }
 
-void common_friends(list_graph_t *users, char *name1, char *name2) {
+void common_friends(list_graph_t *users, char *name1, char *name2)
+{
 	int id1 = get_user_id(name1);
 	int id2 = get_user_id(name2);
 
@@ -80,15 +85,15 @@ void common_friends(list_graph_t *users, char *name1, char *name2) {
 	int exists = 0;
 
 	// store the friends of the first users in the array
-	for (ll_node_t *node = users->neighbors[id1]->head; node;
-		 node = node->next)
+	for (ll_node_t *node = users->neighbors[id1]->head; node; node = node->next)
 		common[*(int *)node->data]++;
 
 	// store the friends of the second user in the array
 	for (ll_node_t *node = users->neighbors[id2]->head; node;
 		 node = node->next) {
 		common[*(int *)node->data]++;
-		if (common[*(int *)node->data] == 2) exists = 1;
+		if (common[*(int *)node->data] == 2)
+			exists = 1;
 	}
 
 	if (!exists) {
@@ -108,7 +113,8 @@ void common_friends(list_graph_t *users, char *name1, char *name2) {
 	free(common);
 }
 
-void suggestions(list_graph_t *users, char *name) {
+void suggestions(list_graph_t *users, char *name)
+{
 	int id = get_user_id(name);
 
 	// frequency array to avoid writing names twice
@@ -118,12 +124,13 @@ void suggestions(list_graph_t *users, char *name) {
 	// check if there are suggestions
 	int exists = 0;
 
-	for (ll_node_t *node = users->neighbors[id]->head; node; node = node->next) {
+	for (ll_node_t *node = users->neighbors[id]->head; node;
+		 node = node->next) {
 		int friend_id = *(int *)node->data;
 		// go trough the friends of each friend of the given user
 		for (ll_node_t *frnd = users->neighbors[friend_id]->head; frnd;
-				 frnd = frnd->next) {
-			int fof_id = *(int *)frnd->data;  // friend of friend's id
+			 frnd = frnd->next) {
+			int fof_id = *(int *)frnd->data; // friend of friend's id
 			if (fof_id != id && !lg_has_edge(users, id, fof_id)) {
 				found[fof_id]++;
 				exists = 1;
@@ -147,19 +154,21 @@ void suggestions(list_graph_t *users, char *name) {
 	free(found);
 }
 
-void popular(list_graph_t *users, char *name) {
+void popular(list_graph_t *users, char *name)
+{
 	int id = get_user_id(name);
 	unsigned int max_friends = users->neighbors[id]->size;
-	int popular_id = id;  // id of the most popular friend
+	int popular_id = id; // id of the most popular friend
 
-	for (ll_node_t *node = users->neighbors[id]->head; node; node = node->next) {
+	for (ll_node_t *node = users->neighbors[id]->head; node;
+		 node = node->next) {
 		int fr_id = *(int *)node->data;
 		if (users->neighbors[fr_id]->size > max_friends) {
 			max_friends = users->neighbors[fr_id]->size;
 			popular_id = fr_id;
 		} else if (users->neighbors[fr_id]->size == max_friends) {
 			if (popular_id != id && fr_id < popular_id)
-				popular_id = fr_id;  // choose the friend with the lower id
+				popular_id = fr_id; // choose the friend with the lower id
 		}
 	}
 
@@ -173,7 +182,8 @@ void popular(list_graph_t *users, char *name) {
 
 // Breadth First Search traversal of a graph that saves the distance
 // from a given node to every othe node in the graph
-void bfs(list_graph_t *lg, int start, int *visited, int *dist) {
+void bfs(list_graph_t *lg, int start, int *visited, int *dist)
+{
 	visited[start] = 1;
 	dist[start] = 0;
 	queue_t *q = q_create(sizeof(int), lg->nodes);
@@ -193,16 +203,16 @@ void bfs(list_graph_t *lg, int start, int *visited, int *dist) {
 	q_free(q);
 }
 
-void friend_distance(list_graph_t *users, char *name1, char *name2) {
+void friend_distance(list_graph_t *users, char *name1, char *name2)
+{
 	int *visited = calloc(users->nodes, sizeof(int));
 	DIE(!visited, "calloc() failed\n");
 
 	int *dist = calloc(users->nodes, sizeof(int));
 	DIE(!dist, "calloc() failed\n");
 
-	for (int i = 0; i < users->nodes; i++) {
+	for (int i = 0; i < users->nodes; i++)
 		dist[i] = INF;
-	}
 
 	int id1 = get_user_id(name1);
 	int id2 = get_user_id(name2);

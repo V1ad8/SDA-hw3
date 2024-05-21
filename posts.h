@@ -25,7 +25,7 @@ typedef struct post_t {
 */
 void handle_input_posts(char *input, ll_list_t *posts);
 
-// Function to create a post and add it to the list of posts
+// @brief Function to create a post and add it to the list of posts
 // @param posts: The list of posts
 // @param user: The user that creates the post
 // @param title: The title of the post
@@ -40,7 +40,7 @@ post_t *create_post(ll_list_t *posts, char *user, char *title);
 void repost_post(ll_list_t *posts, char *user, unsigned int post_id,
 				 unsigned int repost_id);
 
-// Function to find the common repost of two reposts, basically lca
+// @brief Function to find the common repost of two reposts, basically lca
 // @param posts: The list of posts
 // @param post_id: The id of the post
 // @param repost_id1: The id of the first repost
@@ -48,7 +48,7 @@ void repost_post(ll_list_t *posts, char *user, unsigned int post_id,
 void common_repost(ll_list_t *posts, unsigned int post_id,
 				   unsigned int repost_id1, unsigned int repost_id2);
 
-// Function to like a post
+// @brief Function to like a post
 // @param posts: The list of posts
 // @param user: The user that likes the post
 // @param post_id: The id of the post
@@ -56,25 +56,25 @@ void common_repost(ll_list_t *posts, unsigned int post_id,
 void like_post(ll_list_t *posts, char *user, unsigned int post_id,
 			   unsigned int repost_id);
 
-// Function to find a ratio for a post
+// @brief Function to find a ratio for a post
 // @param posts: The list of posts
 // @param post_id: The id of the post
 void ratio(ll_list_t *posts, unsigned int post_id);
 
-// Function to delete a post and all its reposts
+// @brief Function to delete a post and all its reposts
 // @param posts: The list of posts
 // @param post_id: The id of the post
 // @param repost_id: The id of the repost [optional]
 void delete_post(ll_list_t *posts, unsigned int post_id,
 				 unsigned int repost_id);
 
-// Function to get the likes of a post
+// @brief Function to get the likes of a post
 // @param posts: The list of posts
 // @param post_id: The id of the post
 // @param repost_id: The id of the repost [optional]
 void get_likes(ll_list_t *posts, unsigned int post_id, unsigned int repost_id);
 
-// Function to get the reposts of a post
+// @brief Function to get the reposts of a post
 // @param posts: The list of posts
 // @param post_id: The id of the post
 // @param repost_id: The id of the repost [optional]

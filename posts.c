@@ -286,7 +286,7 @@ void delete_post(ll_list_t *posts, unsigned int post_id, unsigned int repost_id)
 	}
 
 	// Remove the post and its reposts from the tree
-	tr_remove_hard(node, free_post);
+	tr_remove(node, free_post);
 
 	// Free the memory
 	free(removed->data);

@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Die function for error handling
 #define DIE(assertion, call_description)                       \
 	do {                                                       \
 		if (assertion) {                                       \
@@ -19,6 +20,7 @@
 		}                                                      \
 	} while (0)
 
+// Boolean type
 typedef enum bool { false, true } bool;
 
 #endif /* UTILS_H */

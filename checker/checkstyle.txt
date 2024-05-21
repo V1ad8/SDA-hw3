@@ -1,16 +1,1 @@
-./add/specific.c:76: CHECK:COMPARISON_TO_NULL: Comparison to NULL could be written "!node"
-./add/specific.c:99: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./add/specific.c:103: CHECK:UNNECESSARY_PARENTHESES: Unnecessary parentheses around node->kid
-./add/specific.c:108: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./add/specific.c:144: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./add/specific.c:144: CHECK:COMPARISON_TO_NULL: Comparison to NULL could be written "!node1"
-./add/specific.c:144: CHECK:COMPARISON_TO_NULL: Comparison to NULL could be written "!node2"
-./add/specific.c:151: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./add/specific.c:155: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./friends.c:91: ERROR:TRAILING_STATEMENTS: trailing statements should be on next line
-./friends.c:121: CHECK:LONG_LINE: line length of 81 exceeds 80 columns
-./friends.c:155: CHECK:LONG_LINE: line length of 81 exceeds 80 columns
-./friends.c:203: WARNING:BRACES: braces {} are not necessary for single statement blocks
-./friends.h:21: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
-./friends.h:21: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
-./friends.h:21: ERROR:POINTER_LOCATION: "foo* bar" should be "foo *bar"
+

@@ -18,26 +18,44 @@ typedef struct queue_t {
 	void **buff;
 } queue_t;
 
+// @brief Create a new queue
+// @param data_size The size of the data
+// @param max_size The maximum size of the queue
+// @return The new queue
 queue_t *q_create(unsigned int data_size, unsigned int max_size);
 
+// @brief Get the size of the queue
+// @param q The queue
+// @return The size of the queue
 unsigned int q_get_size(queue_t *q);
 
+// @brief Check if the queue is empty
+// @param q The queue
+// @return 1 if the queue is empty, 0 otherwise
 unsigned int q_is_empty(queue_t *q);
 
+// @brief Get the front of the queue
+// @param q The queue
+// @return The front of the queue
 void *q_front(queue_t *q);
 
+// @brief Dequeue the front of the queue
+// @param q The queue
+// @return 1 if the dequeue was successful, 0 otherwise
 int q_dequeue(queue_t *q);
 
+// @brief Enqueue a new element in the queue
+// @param q The queue
+// @param new_data The new data to be enqueued
+// @return 1 if the enqueue was successful, 0 otherwise
 int q_enqueue(queue_t *q, void *new_data);
 
-int q_dequeue_request(queue_t *q);
-
-int q_enqueue_request(queue_t *q, void *req);
-
+// @brief Empty the queue
+// @param q The queue
 void q_clear(queue_t *q);
 
+// @brief Free the data of the queue
+// @param q The queue
 void q_free(queue_t *q);
-
-void q_free_request(queue_t *q);
 
 #endif /* ADD_QUEUE_H */

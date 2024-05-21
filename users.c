@@ -33,8 +33,9 @@ void init_users(void)
 	fclose(users_db);
 }
 
-void free_users(void) {
-	for(int i = 0; i < users_number; i++)
+void free_users(void)
+{
+	for (int i = 0; i < users_number; i++)
 		if (users[i])
 			free(users[i]);
 

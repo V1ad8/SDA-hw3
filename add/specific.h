@@ -4,18 +4,14 @@
 #include "../posts.h"
 #include "tree.h"
 
-ll_node_t *ll_add_nth_post(ll_list_t *list, unsigned int n,
-						   const post_t *new_data);
+ll_node_t *ll_create_post(const void *new_data, unsigned int data_size);
 
-void tr_insert_post(tree_t *tree, post_t *data, tr_node_t *parent);
+ll_node_t *ll_create_tree_post(const void *new_data, unsigned int data_size);
 
-void tr_remove_hard(tr_node_t *node);
+tr_node_t *tr_create_post(const void *data, unsigned int data_size);
 
-void tr_destroy(tree_t **tree);
+void free_post(void *data);
 
-tr_node_t *get_post_by_id(tree_t *tree, unsigned int post_id);
-
-ll_node_t *ll_add_nth_tree(ll_list_t *list, unsigned int n,
-						   const tr_node_t *new_data);
+int compare_post(void *data1, void *data2, size_t data_size);
 
 #endif // SPECIFIC_LL_H

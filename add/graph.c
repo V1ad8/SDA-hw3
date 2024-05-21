@@ -29,7 +29,8 @@ void lg_add_edge(list_graph_t *graph, int src, int dest)
 		!is_node_in_graph(dest, graph->nodes))
 		return;
 
-	ll_add_nth_node(graph->neighbors[src], graph->neighbors[src]->size, &dest);
+	ll_add_nth_node(graph->neighbors[src], graph->neighbors[src]->size, &dest,
+					ll_create_node);
 }
 
 ll_node_t *find_node(ll_list_t *ll, int node, unsigned int *pos)

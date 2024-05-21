@@ -110,13 +110,15 @@ post_t *create_post(ll_list_t *posts, char *user, char *title)
 		DIE(!post->events, "Malloc failed while creating post");
 
 		// Insert the post into the tree
-		tr_insert_post(post->events, post, NULL);
+		tr_insert(post->events, post, NULL, tr_create_post,
+				  ll_create_tree_post);
 
 		// Print a message
 		printf("Created \"%s\" for %s\n", title, user);
 
 		// Add the post to the list of posts
-		ll_node_t *new_node = ll_add_nth_post(posts, ll_get_size(posts), post);
+		ll_node_t *new_node =
+			ll_add_nth_node(posts, ll_get_size(posts), post, ll_create_post);
 
 		// Free the memory
 		free(post->title);
@@ -156,10 +158,10 @@ void repost_post(ll_list_t *posts, char *user, unsigned int post_id,
 	// Get the parent node for the repost
 	tr_node_t *node = post->events->root;
 	if (repost_id)
-		node = get_post_by_id(post->events, repost_id);
+		node = tr_search(post->events, &repost_id, compare_post);
 
 	// Insert the repost into the tree
-	tr_insert_post(post->events, repost, node);
+	tr_insert(post->events, repost, node, tr_create_post, ll_create_tree_post);
 
 	// Print a message
 	printf("Created repost #%d for %s\n", repost->id, user);
@@ -175,8 +177,8 @@ void common_repost(ll_list_t *posts, unsigned int post_id,
 	post_t *post = get_post(posts, post_id);
 
 	// Get the nodes for the reposts
-	tr_node_t *node1 = get_post_by_id(post->events, repost_id1);
-	tr_node_t *node2 = get_post_by_id(post->events, repost_id2);
+	tr_node_t *node1 = tr_search(post->events, &repost_id1, compare_post);
+	tr_node_t *node2 = tr_search(post->events, &repost_id2, compare_post);
 	DIE(!node1 || !node2, "Repost not found");
 
 	// Get the lowest common ancestor
@@ -197,7 +199,7 @@ void like_post(ll_list_t *posts, char *user, unsigned int post_id,
 	// Get the node for the repost to like
 	tr_node_t *node = post->events->root;
 	if (repost_id)
-		node = get_post_by_id(post->events, repost_id);
+		node = tr_search(post->events, &repost_id, compare_post);
 
 	// Print the message piece by piece
 	printf("User %s ", user);
@@ -251,7 +253,7 @@ void delete_post(ll_list_t *posts, unsigned int post_id, unsigned int repost_id)
 	// Get the node for the repost to delete
 	tr_node_t *node = post->events->root;
 	if (repost_id)
-		node = get_post_by_id(post->events, repost_id);
+		node = tr_search(post->events, &repost_id, compare_post);
 
 	// Save the removed node
 	ll_node_t *removed;
@@ -284,7 +286,7 @@ void delete_post(ll_list_t *posts, unsigned int post_id, unsigned int repost_id)
 	}
 
 	// Remove the post and its reposts from the tree
-	tr_remove_hard(node);
+	tr_remove_hard(node, free_post);
 
 	// Free the memory
 	free(removed->data);
@@ -300,7 +302,7 @@ void get_likes(ll_list_t *posts, unsigned int post_id, unsigned int repost_id)
 	// Get the node for the repost to search in
 	tr_node_t *node = post->events->root;
 	if (repost_id)
-		node = get_post_by_id(post->events, repost_id);
+		node = tr_search(post->events, &repost_id, compare_post);
 
 	// Get the number of likes
 	unsigned int likes = count_likes(node->data);
@@ -321,7 +323,7 @@ void get_reposts(ll_list_t *posts, unsigned int post_id, unsigned int repost_id)
 	// Get the node for the repost to search in
 	tr_node_t *node = post->events->root;
 	if (repost_id)
-		node = get_post_by_id(post->events, repost_id);
+		node = tr_search(post->events, &repost_id, compare_post);
 
 	// Check if the post is a repost and print the message
 	if (!repost_id)

@@ -38,7 +38,7 @@ ll_node_t *ll_get_nth_node(ll_list_t *list, unsigned int n)
 	return node;
 }
 
-static ll_node_t *ll_create_node(const void *new_data, unsigned int data_size)
+ll_node_t *ll_create_node(const void *new_data, unsigned int data_size)
 {
 	ll_node_t *node = calloc(1, sizeof(*node));
 	DIE(!node, "calloc node");
@@ -51,8 +51,9 @@ static ll_node_t *ll_create_node(const void *new_data, unsigned int data_size)
 	return node;
 }
 
-ll_node_t *ll_add_nth_node(ll_list_t *list, unsigned int n,
-						   const void *new_data)
+ll_node_t *
+ll_add_nth_node(ll_list_t *list, unsigned int n, const void *new_data,
+				ll_node_t *(*create_data)(const void *, unsigned int data_size))
 {
 	ll_node_t *new_node, *prev_node;
 
@@ -62,7 +63,7 @@ ll_node_t *ll_add_nth_node(ll_list_t *list, unsigned int n,
 	if (n > list->size)
 		return NULL;
 
-	new_node = ll_create_node(new_data, list->data_size);
+	new_node = create_data(new_data, list->data_size);
 
 	if (n == 0) {
 		new_node->next = list->head;

@@ -68,7 +68,7 @@ int main(void)
 	for (ll_node_t *node = posts->head; node; node = node->next) {
 		post_t *post = (post_t *)node->data;
 		free(post->title);
-		tr_destroy(&post->events);
+		tr_destroy(&post->events, free_post);
 	}
 
 	ll_free(&posts);

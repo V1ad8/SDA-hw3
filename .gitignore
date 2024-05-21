@@ -6,5 +6,4 @@ posts
 .gitignore
 .vscode
 .checkpatch-camelcase.git.
-checker
-checker/checkstyle.txt
+out.txt

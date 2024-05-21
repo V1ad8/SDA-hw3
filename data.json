@@ -202,7 +202,6 @@
         "time_valgrind": 0.0,
         "timeout": 30000,
         "test_score": 3
-        "test_score": 3
       }
     ],
     [
@@ -304,7 +303,6 @@
         "time_normal": 0.0,
         "time_valgrind": 0.0,
         "timeout": 30000,
-        "test_score": 3
         "test_score": 3
       }
     ]

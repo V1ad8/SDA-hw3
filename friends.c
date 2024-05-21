@@ -143,7 +143,7 @@ void suggestions(list_graph_t *users, char *name)
 		free(found);
 		return;
 	}
-
+	
 	printf("Suggestions for %s:\n", name);
 	for (int i = 0; i < users->nodes; i++) {
 		if (found[i]) {

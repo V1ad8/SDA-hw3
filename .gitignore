@@ -1,0 +1,14 @@
+.vscode
+
+*.o
+friends
+posts
+feed
+
+*.zip
+.env
+checker/output/*.out
+checker/output/*.valgrind
+.checkpatch-camelcase.git.
+checker
+checker/checkstyle.txt

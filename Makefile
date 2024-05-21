@@ -29,5 +29,8 @@ social_media_posts.o:
 social_media_feed.o:
 	$(CC) $(CFLAGS) -c -D TASK_1 -D TASK_2 -D TASK_3 -o $@ social_media.c
 
+lab_implem.o:
+	$(CC) $(CFLAGS) -c -D TASK_1 -D TASK_2 -D TASK_3 -o $@ lab_implem.c
+
 clean:
 	rm -rf *.o friends posts feed

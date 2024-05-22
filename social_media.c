@@ -57,7 +57,7 @@ int main(void)
 #endif
 
 #ifdef TASK_3
-		handle_input_feed(input);
+		handle_input_feed(input, users_graph);
 #endif
 	}
 

@@ -61,12 +61,16 @@ void show_feed(list_graph_t *users_graph, ll_list_t *posts,
 void traverse_reposts(tr_node_t *node, list_graph_t *users,
 					  int *friends, unsigned int user_id)
 {
+	// check if the node in NULL
 	if (!node)
 		return;
 
+	// check if the current repost is made by a friend
 	if (lg_has_edge(users, ((post_t *)node->data)->user_id, user_id))
+		// mark the friend in the frequency array
 		friends[((post_t *)node->data)->user_id]++;
 
+	// go trough the children of the current node recursively
 	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next)
 		traverse_reposts(curr->data, users, friends, user_id);
 }

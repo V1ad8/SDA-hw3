@@ -22,7 +22,8 @@ void handle_input_feed(char *input, list_graph_t *users_graph,
 		int feed_size = atoi(size);
 		show_feed(users_graph, posts, name, feed_size);
 	} else if (!strcmp(cmd, "view-profile")) {
-		(void)cmd;
+		char *name = strtok(NULL, "\n ");
+		show_profile(posts, name);
 	} else if (!strcmp(cmd, "friends-repost")) {
 		char *name = strtok(NULL, "\n ");
 		char *id = strtok(NULL, "\n ");
@@ -61,7 +62,7 @@ void show_feed(list_graph_t *users_graph, ll_list_t *posts,
 void traverse_reposts(tr_node_t *node, list_graph_t *users,
 					  int *friends, unsigned int user_id)
 {
-	// check if the node in NULL
+	// check if the node is NULL
 	if (!node)
 		return;
 
@@ -90,10 +91,97 @@ void friends_repost(list_graph_t *users_graph, ll_list_t *posts,
 
 	traverse_reposts(post->events->root, users_graph, friends, id);
 
-	// printf("Friends that reposted:\n");
 	for (int i = 0; i < users_graph->nodes; i++)
 		if (friends[i])
 			printf("%s\n", get_user_name(i));
 
 	free(friends);
+}
+
+void insert_sorted(ll_list_t *profile_list, void *data,
+				   ll_node_t *(*create_data)(const void *, unsigned int data_size), char *title)
+{
+	ll_node_t *new_node = create_data(data, profile_list->data_size);
+	if(!((post_t *)new_node->data)->title)
+		((post_t *)new_node->data)->title = strdup(title);
+
+	post_t *aux_post = (post_t *)data;
+
+	if (!profile_list->size) {
+		profile_list->head = new_node;
+		profile_list->tail = new_node;
+		profile_list->size++;
+		return;
+	}
+
+	if (aux_post->id < ((post_t *)profile_list->head->data)->id) {
+		profile_list->head->prev = new_node;
+		new_node->next = profile_list->head;
+		profile_list->head = new_node;
+		profile_list->size++;
+		return;
+	}
+
+	if (aux_post->id > ((post_t *)profile_list->tail->data)->id) {
+		profile_list->tail->next = new_node;
+		new_node->prev = profile_list->tail;
+		profile_list->tail = new_node;
+		profile_list->size++;
+		return;
+	}
+
+	ll_node_t *curr = profile_list->head;
+	while(((post_t *)curr->data)->id < aux_post->id)
+		curr = curr->next;
+	new_node->next = curr;
+	new_node->prev = curr->prev;
+	curr->prev->next = new_node;
+	curr->prev = new_node;
+	profile_list->size++;
+}
+
+void look_for_reposts(ll_list_t *profile_list, tr_node_t *node,
+					  unsigned int user_id, char *title)
+{
+	if (!node)
+		return;
+
+	if (((post_t *)node->data)->user_id == user_id)
+		insert_sorted(profile_list, node->data, ll_create_post, title);
+
+	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next)
+		look_for_reposts(profile_list, curr->data, user_id, title);
+}
+
+void show_profile(ll_list_t *posts, char *name)
+{
+	// get the given user's id
+	unsigned int id = get_user_id(name);
+
+	// create a list that contains every post and repost of the given user
+	ll_list_t *profile_list = ll_create(sizeof(post_t));
+
+	for (ll_node_t *post = posts->head; post; post = post->next) {
+		post_t *curr_post = (post_t *)post->data;
+		// look trough the current post if it's made by the given user or
+		// if it has been reposted by the user
+		look_for_reposts(profile_list, curr_post->events->root,
+						 id, curr_post->title);
+	}
+
+	for (ll_node_t *post = profile_list->head; post; post = post->next) {
+		post_t *curr_post = (post_t *)post->data;
+		if (!curr_post->events)
+			printf("Reposted: \"%s\"\n", curr_post->title);
+		else
+			printf("Posted: \"%s\"\n", curr_post->title);
+	}
+
+	// for (ll_node_t *node = profile_list->head; node; node = node->next) {
+	// 	post_t *post = (post_t *)node->data;
+	// 	free(post->title);
+	// 	tr_destroy(&post->events, free_post);
+	// }
+
+	// ll_free(&profile_list);
 }

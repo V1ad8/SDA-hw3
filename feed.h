@@ -20,5 +20,9 @@ void traverse_reposts(tr_node_t *node, list_graph_t *users,
 
 void friends_repost(list_graph_t *users_graph, ll_list_t *posts,
 					char *name, unsigned int post_id);
-
+void insert_sorted(ll_list_t *profile_list, void *data,
+				   ll_node_t *(*create_data)(const void *, unsigned int data_size), char *title);
+void look_for_reposts(ll_list_t *profile_list, tr_node_t *node,
+					  unsigned int user_id, char *title);
+void show_profile(ll_list_t *posts, char *name);
 #endif // FEED_H

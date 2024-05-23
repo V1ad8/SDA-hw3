@@ -1,2 +1,0 @@
-./feed.c:96: WARNING:DEEP_INDENTATION: Too many leading tabs - consider code refactoring
-./feed.c:96: WARNING:BRACES: braces {} are not necessary for single statement blocks

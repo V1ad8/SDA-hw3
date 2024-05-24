@@ -89,31 +89,41 @@ void friends_repost(list_graph_t *users_graph, ll_list_t *posts,
 	int *friends = calloc(users_graph->nodes, sizeof(int));
 	DIE(!friends, "calloc friends_repost");
 
+	// look trough all reposts
 	traverse_reposts(post->events->root, users_graph, friends, id);
 
+	// print every friend that reposted
 	for (int i = 0; i < users_graph->nodes; i++)
 		if (friends[i])
 			printf("%s\n", get_user_name(i));
 
+	// free the frequency array
 	free(friends);
 }
 
 void insert_sorted(ll_list_t *profile_list, void *data, char *title)
 {
+	// create the node
 	ll_node_t *new_node = calloc(1, sizeof(ll_node_t));
 	DIE(!new_node, "malloc node");
 
+	// create the node data
 	new_node->data = calloc(1, sizeof(profile_post_t));
 	DIE(!new_node->data, "malloc data");
 
 	post_t *aux_post = (post_t *)data;
+
+	// fill the id and title
 	((profile_post_t *)new_node->data)->id = aux_post->id;
 	((profile_post_t *)new_node->data)->title = title;
+
+	// check if the post is a repost
 	if (!aux_post->title)
 		((profile_post_t *)new_node->data)->is_repost = true;
 	else
 		((profile_post_t *)new_node->data)->is_repost = false;
 
+	// if it's the first element
 	if (!profile_list->size) {
 		profile_list->head = new_node;
 		profile_list->tail = new_node;
@@ -121,6 +131,7 @@ void insert_sorted(ll_list_t *profile_list, void *data, char *title)
 		return;
 	}
 
+	// at the start of the list
 	if (aux_post->id < ((profile_post_t *)profile_list->head->data)->id) {
 		profile_list->head->prev = new_node;
 		new_node->next = profile_list->head;
@@ -129,6 +140,7 @@ void insert_sorted(ll_list_t *profile_list, void *data, char *title)
 		return;
 	}
 
+	// at the end of the list
 	if (aux_post->id > ((profile_post_t *)profile_list->tail->data)->id) {
 		profile_list->tail->next = new_node;
 		new_node->prev = profile_list->tail;
@@ -137,6 +149,7 @@ void insert_sorted(ll_list_t *profile_list, void *data, char *title)
 		return;
 	}
 
+	// anywhere else in the list
 	ll_node_t *curr = profile_list->head;
 	while (((profile_post_t *)curr->data)->id < aux_post->id)
 		curr = curr->next;
@@ -153,9 +166,11 @@ void look_for_reposts(ll_list_t *profile_list, tr_node_t *node,
 	if (!node)
 		return;
 
+	// if the post belongs to the user add it to the profile list
 	if (((post_t *)node->data)->user_id == user_id)
 		insert_sorted(profile_list, node->data, title);
 
+	// go trough the children of the current node recursively
 	for (ll_node_t *curr = node->kid->head; curr; curr = curr->next)
 		look_for_reposts(profile_list, curr->data, user_id, title);
 }
@@ -184,5 +199,6 @@ void show_profile(ll_list_t *posts, char *name)
 			printf("Posted: \"%s\"\n", curr_post->title);
 	}
 
+	// free the profile list
 	ll_free(&profile_list);
 }

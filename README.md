@@ -6,8 +6,8 @@
 
 ```
 Echipa tema 3 SD:
-id.moodle1
-id.moodle2
+amarinescu0804
+vlad.ungureanu1808
 ```
 
 ## Task Description

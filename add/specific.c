@@ -126,7 +126,8 @@ void free_post(void *data)
 		return;
 
 	// Free the title and the events
-	free(((post_t *)data)->events);
+	if (((post_t *)data)->events)
+		free(((post_t *)data)->events);
 	free(((post_t *)data)->title);
 
 	// Free the data

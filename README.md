@@ -97,16 +97,16 @@ The code is spread throughout eleven C source files to make reading them individ
  * `social_media.c`: initializes every task based on which task we are running; forwards the input to the right source file
  * `users.c`: contains the initialization of the users array, the function that frees the users array and two functions that connect a name and an id (get each one based on the other)
  * `friends.c`: contains the function that handles the input and the functions related to the users (adding friends, removing friends, etc.)
- * `posts.c`:
- * `posts_add.c`:
+ * `posts.c`: contains the function that handles the input and the functions related to the posts (creating posts/reposts, liking etc.)
+ * `posts_add.c`: contains additional functions needed by the functions in the previous file
  * `feed.c`: contains the function that handles the input and the functions related to the feed (showing the feed, viewing a profile, etc.)
  * `feed_add.c`: contains additional functions needed for the clique functionality
- * `add/graph.c`, `add/linked_list.c`, `add/queue.c`: contain implementations of the data structures borrowed from the 7th lab [skeleton](https://ocw.cs.pub.ro/courses/_media/sd-ca/laboratoare/lab07_2024.zip)
+ * `add/graph.c`, `add/linked_list.c`, `add/queue.c`, `add/hashtable.c`: contain implementations of the data structures borrowed from the 7th lab [skeleton](https://ocw.cs.pub.ro/courses/_media/sd-ca/laboratoare/lab07_2024.zip)
  * `add/tree.c`: contains the implementation of a generic tree data structure made by Vlad
  * `add/specific.c`: contains functions for creating/deleting/comparing data with more complex structures; needed as parameters for some of the previous functions
 
  These source files are supported by eleven header files:
- * `add/graph.h`, `add/linked_list.h`, `add/queue.h`, `add/tree.h`, `add/specific.h`, `users.h`, `friends.h`, `posts.h`, `posts_add.h`, `feed.h`, `feed_add.h`: contain the headers of the corresponding C files and the declarations of the functions used in them
+ * `add/graph.h`, `add/linked_list.h`, `add/queue.h`, `add/tree.h`, `add/specific.h`, `add/hashtable.h`, `users.h`, `friends.h`, `posts.h`, `posts_add.h`, `feed.h`, `feed_add.h`: contain the headers of the corresponding C files and the declarations of the functions used in them
  * `utils.h`: contains the declaration of the macro `DIE` and the C boolean data type
 
  ### Data Structures Used

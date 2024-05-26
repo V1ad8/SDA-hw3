@@ -3,6 +3,12 @@
 
 #include "friends.h"
 #include "posts.h"
+#include "add/hashtable.h"
+
+// Enumeration for the visit status of a user in the clique
+typedef enum visit_t { NOT_VISITED, IN_CLIQUE, NOT_IN_CLIQUE } visit_t;
+
+#include "feed_add.h"
 
 /**
  * Function that handles the calling of every command from task 3
@@ -73,5 +79,11 @@ void look_for_reposts(ll_list_t *profile_list, tr_node_t *node,
  * @param name The name
  */
 void show_profile(ll_list_t *posts, char *name);
+
+// @brief Function that finds the maximum clique of a user
+// @param users_graph: The graph of users
+// @param user: The user to find the maximum clique for
+void clique(list_graph_t *users_graph, unsigned int user);
+
 #endif // FEED_H
 

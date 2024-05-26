@@ -11,7 +11,7 @@ ll_node_t *ll_create_post(const void *new_data, unsigned int data_size)
 	DIE(!node, "malloc node");
 
 	// Allocate memory for the data of the node
-	node->data = calloc(1, sizeof(post_t));
+	node->data = malloc(sizeof(post_t));
 	DIE(!node->data, "malloc data");
 
 	// Check if the post is a repost

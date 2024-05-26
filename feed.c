@@ -7,8 +7,7 @@
 #include "friends.h"
 #include "posts.h"
 
-void handle_input_feed(char *input, list_graph_t *users_graph,
-					   ll_list_t *posts)
+void handle_input_feed(char *input, list_graph_t *users_graph, ll_list_t *posts)
 {
 	char *commands = strdup(input);
 	char *cmd = strtok(commands, "\n ");
@@ -29,16 +28,20 @@ void handle_input_feed(char *input, list_graph_t *users_graph,
 		char *id = strtok(NULL, "\n ");
 		unsigned int post_id = atoi(id);
 		friends_repost(users_graph, posts, name, post_id);
-	} else if (!strcmp(cmd, "common-groups")) {
-		(void)cmd;
-		// TODO: Add function
+	} else if (!strcmp(cmd, "common-group")) {
+		// Get the user
+		char *user = strtok(NULL, "\n ");
+
+		// Find the maximum clique
+		clique(users_graph, get_user_id(user));
 	}
 
+	// Free the commands
 	free(commands);
 }
 
-void show_feed(list_graph_t *users_graph, ll_list_t *posts,
-			   char *name, int feed_size)
+void show_feed(list_graph_t *users_graph, ll_list_t *posts, char *name,
+			   int feed_size)
 {
 	// get the given user's id
 	unsigned int id = get_user_id(name);
@@ -59,8 +62,8 @@ void show_feed(list_graph_t *users_graph, ll_list_t *posts,
 	}
 }
 
-void traverse_reposts(tr_node_t *node, list_graph_t *users,
-					  int *friends, unsigned int user_id)
+void traverse_reposts(tr_node_t *node, list_graph_t *users, int *friends,
+					  unsigned int user_id)
 {
 	// check if the node is NULL
 	if (!node)
@@ -76,8 +79,8 @@ void traverse_reposts(tr_node_t *node, list_graph_t *users,
 		traverse_reposts(curr->data, users, friends, user_id);
 }
 
-void friends_repost(list_graph_t *users_graph, ll_list_t *posts,
-					char *name, unsigned int post_id)
+void friends_repost(list_graph_t *users_graph, ll_list_t *posts, char *name,
+					unsigned int post_id)
 {
 	// get the post with the given id
 	post_t *post = get_post(posts, post_id);
@@ -187,8 +190,8 @@ void show_profile(ll_list_t *posts, char *name)
 		post_t *curr_post = (post_t *)post->data;
 		// look trough the current post if it's made by the given user or
 		// if it has been reposted by the user
-		look_for_reposts(profile_list, curr_post->events->root,
-						 id, curr_post->title);
+		look_for_reposts(profile_list, curr_post->events->root, id,
+						 curr_post->title);
 	}
 
 	for (ll_node_t *post = profile_list->head; post; post = post->next) {
@@ -201,4 +204,43 @@ void show_profile(ll_list_t *posts, char *name)
 
 	// free the profile list
 	ll_free(&profile_list);
+}
+
+void clique(list_graph_t *users_graph, unsigned int user)
+{
+	// Declare the visited array
+	visit_t visited[MAX_PEOPLE];
+
+	// Initialize the visited array
+	for (unsigned int i = 0; i < MAX_PEOPLE; i++)
+		if (lg_has_edge(users_graph, user, i))
+			visited[i] = NOT_VISITED;
+		else
+			visited[i] = NOT_IN_CLIQUE;
+	visited[user] = IN_CLIQUE;
+
+	// Declare the maximum clique and its visited array
+	unsigned int max_clique = 1;
+	visit_t max_visited[MAX_PEOPLE];
+	for (unsigned int i = 0; i < MAX_PEOPLE; i++)
+		max_visited[i] = NOT_VISITED;
+	visited[user] = IN_CLIQUE;
+
+	// Create the hashtable for the checked cliques
+	hashtable_t *ht = ht_create(MAX_PEOPLE, hash_string, compare_strings);
+
+	// Start the backtracking
+	backtracking(users_graph, user, visited, &max_clique, max_visited, ht);
+
+	// Print the maximum clique
+	printf("The closest friend group of %s is:\n", get_user_name(user));
+
+	// Print the users in the maximum clique
+	for (unsigned int i = 0; i < MAX_PEOPLE; i++) {
+		if (max_visited[i] == IN_CLIQUE)
+			printf("%s\n", get_user_name(i));
+	}
+
+	// Free the hashtable
+	ht_free(ht);
 }

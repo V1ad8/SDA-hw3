@@ -180,8 +180,6 @@ void popular(list_graph_t *users, char *name)
 	}
 }
 
-// Breadth First Search traversal of a graph that saves the distance
-// from a given node to every othe node in the graph
 void bfs(list_graph_t *lg, int start, int *visited, int *dist)
 {
 	visited[start] = 1;

@@ -15,6 +15,13 @@ typedef struct post_t {
 	bool likes[MAX_PEOPLE];
 } post_t;
 
+typedef struct profile_post_t {
+	// true if the post is a repost false if it's a normal post
+	bool is_repost;
+	char *title;
+	unsigned int id;
+} profile_post_t;
+
 #include "add/specific.h"
 #include "posts_add.h"
 

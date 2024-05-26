@@ -29,35 +29,35 @@ void backtracking(list_graph_t *users_graph, unsigned int user,
 				  visit_t *visited, unsigned int *max_clique,
 				  visit_t *max_visited, hashtable_t *checked)
 {
+	// printf("call\n");
+
 	// Add each computed clique to the checked hashtable in otder to avoid
 	// recomputing the same clique multiple times
 	// The key is the visited array converted to a string
 	// It reduces the time complexity of the backtracking by 95.04%
 
 	// Get a string representation of the visited array
-	char *text = (char *)malloc((MAX_PEOPLE + 1) * sizeof(char));
-	DIE(!text, "malloc");
+	static char text[MAX_PEOPLE + 1];
 
 	// Print the visited array to the text string
 	for (unsigned int i = 0; i < MAX_PEOPLE; i++)
 		sprintf(text + i, "%d", visited[i]);
 
 	// If the visited array is already computed, return
-	if (ht_has_key(checked, text)) {
-		free(text);
+	if (ht_has_key(checked, text))
 		return;
-	}
 
 	// Mark the visited array as computed
-	int one = 1;
+	static unsigned char one = 1;
 	ht_put(checked, text, strlen(text) + 1, &one, sizeof(one));
-
-	// Free the text
-	free(text);
 
 	// Search for unvisited neighbours of the current user
 	for (unsigned int i = 0; i < MAX_PEOPLE; i++) {
 		if (visited[i] == NOT_VISITED && lg_has_edge(users_graph, user, i)) {
+			// Check for validity of clique
+			if (!valid_clique(users_graph, visited))
+				continue;
+
 			// Mark the neighbour as visited
 			visited[i] = IN_CLIQUE;
 
@@ -73,7 +73,7 @@ void backtracking(list_graph_t *users_graph, unsigned int user,
 				// specific case of this project.
 				// It reduces the time complexity of the backtracking by 91.84%
 				for (unsigned int j = 0; j < MAX_PEOPLE; j++) {
-					if (ll_get_size(lg_get_neighbours(users_graph, j)) <
+					if (ll_get_size(lg_get_neighbours(users_graph, j)) - 2 <
 							*max_clique &&
 						visited[j] == NOT_VISITED && *max_clique > 2) {
 						return;
@@ -82,9 +82,8 @@ void backtracking(list_graph_t *users_graph, unsigned int user,
 			}
 
 			// Continue the backtracking
-			if (valid_clique(users_graph, visited))
-				backtracking(users_graph, i, visited, max_clique, max_visited,
-							 checked);
+			backtracking(users_graph, i, visited, max_clique, max_visited,
+						 checked);
 
 			// Mark the neighbour as not visited
 			visited[i] = NOT_VISITED;

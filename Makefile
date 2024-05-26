@@ -31,3 +31,7 @@ social_media_feed.o:
 
 clean:
 	rm -rf *.o friends posts feed
+
+pack:
+	make clean
+	zip -FSr SDA_Homework3.zip README.md Makefile add/ *.c *.h

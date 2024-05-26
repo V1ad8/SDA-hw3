@@ -5,9 +5,9 @@
 **Ungureanu Vlad-Marin 315CA**
 
 ```
-Task #3 SDA team:
-amarinescu0804
-vlad.ungureanu1808
+Echipa tema 3 SD:
+id.moodle1
+id.moodle2
 ```
 
 ## Task Description

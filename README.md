@@ -5,7 +5,7 @@
 **Ungureanu Vlad-Marin 315CA**
 
 ```
-Echipa tema 3 SD:
+SDA Homework 3 Team:
 amarinescu0804
 vlad.ungureanu1808
 ```
